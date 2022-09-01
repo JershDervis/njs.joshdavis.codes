@@ -33,10 +33,12 @@ const Home: NextPage = () => {
 							isPageLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
 						}`}
 					>
-						<h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-200">
+						<h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-200 text-center">
 							Josh <span className="text-blue-400">Davis</span> Codes
 						</h1>
-						<p className="text-2xl text-gray-300">A portfolio of my developer experience</p>
+						<p className="text-2xl text-gray-300 text-center">
+							A portfolio of my developer experience
+						</p>
 					</main>
 				</div>
 			</div>
