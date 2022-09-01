@@ -1,5 +1,17 @@
 // pages/api/cron/github.ts
 import { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '../../../server/db/client';
+
+type Repo = {
+	id: string;
+	name: string;
+	description: string;
+	html_url: string;
+	stargazers_count: number;
+	forks_count: number;
+	created_at: Date;
+	updated_at: Date;
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === 'POST') {
@@ -15,8 +27,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					let data = await response.json();
 
 					// Fill the SQL database
+					await prisma.repository.createMany({
+						data: data.map((repo: Repo) => ({
+							id: repo.id,
+							name: repo.name,
+							description: repo.description,
+							url: repo.html_url,
+							stars: repo.stargazers_count,
+							forks: repo.forks_count,
+							createdAt: repo.created_at,
+							updatedAt: repo.updated_at
+						}))
+					});
 				}
-				// See example-response for what the above data will look like
 
 				res.status(200).json({ success: true });
 			} else {
