@@ -29,7 +29,7 @@
     "description": null,
     "fork": false,
     "url": "https://api.github.com/repos/JershDervis/CSIT321",
-    "forks_url": "https://api.github.com/repos/JershDervis/CSIT321/forks",
+    "1url": "https://api.github.com/repos/JershDervis/CSIT321/forks",
     "keys_url": "https://api.github.com/repos/JershDervis/CSIT321/keys{/key_id}",
     "collaborators_url": "https://api.github.com/repos/JershDervis/CSIT321/collaborators{/collaborator}",
     "teams_url": "https://api.github.com/repos/JershDervis/CSIT321/teams",
