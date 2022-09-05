@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { Link, Linkedin } from 'react-bootstrap-icons';
 
 //TODO: Find better way to set isPageLoaded state
 // preferably not using 2x useEffect blocks
@@ -29,7 +30,6 @@ const Home: NextPage = () => {
 
 			{/* Main content */}
 			<Image
-				className="bg-cover"
 				src="/bg.jpg"
 				alt="Image of Josh Davis on holiday"
 				layout="fill"
@@ -39,6 +39,14 @@ const Home: NextPage = () => {
 				priority
 			/>
 			<div className="w-full h-screen absolute bg-slate-900 bg-opacity-80">
+				<a
+					href="https://www.linkedin.com/in/joshua--davis/"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="float-right p-4 m-4 rounded-md hover:bg-gray-800 transform duration-200 hover:bg-opacity-100 transition-all hover:scale-110"
+				>
+					<Linkedin className="w-8 h-8 text-gray-300" />
+				</a>
 				<main
 					className={`container mx-auto flex flex-col items-center justify-center min-h-screen p-4`}
 				>
