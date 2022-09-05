@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Link, Linkedin } from 'react-bootstrap-icons';
+import { Linkedin } from 'react-bootstrap-icons';
 
 //TODO: Find better way to set isPageLoaded state
 // preferably not using 2x useEffect blocks
@@ -38,12 +38,12 @@ const Home: NextPage = () => {
 				blurDataURL="/bg-blur.png"
 				priority
 			/>
-			<div className="w-full h-screen absolute bg-slate-900 bg-opacity-80">
+			<div className="w-full h-screen bg-slate-900 bg-opacity-80 relative">
 				<a
 					href="https://www.linkedin.com/in/joshua--davis/"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="float-right p-4 m-4 rounded-md hover:bg-gray-800 transform duration-200 hover:bg-opacity-100 transition-all hover:scale-110"
+					className="absolute right-0 p-4 m-4 rounded-md hover:bg-gray-800 transform duration-200 hover:bg-opacity-100 transition-all hover:scale-110"
 				>
 					<Linkedin className="w-8 h-8 text-gray-300" />
 				</a>
