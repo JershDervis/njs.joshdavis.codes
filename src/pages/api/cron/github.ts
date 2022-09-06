@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../server/db/client';
 
 type Repo = {
-	id: string;
+	id: number;
 	name: string;
 	description: string;
 	html_url: string;
@@ -24,12 +24,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				);
 
 				if (response.status === 200) {
-					let data = await response.json();
+					let resData = await response.json();
 
-					// Fill the SQL database
+					// Fill the SQL database TODO: Fix this createMany records
 					await prisma.repository.createMany({
-						data: data.map((repo: Repo) => ({
-							id: repo.id,
+						data: resData.map((repo: Repo) => ({
 							name: repo.name,
 							description: repo.description,
 							url: repo.html_url,

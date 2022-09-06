@@ -10,7 +10,7 @@ datasource db {
 }
 
 model Repository {
-  id          String   @id @default(cuid())
+  id          Int      @id @default(autoincrement())
   name        String
   description String
   url         String
