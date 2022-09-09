@@ -2,14 +2,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Linkedin } from 'react-bootstrap-icons';
+import { Linkedin, Github } from 'react-bootstrap-icons';
 
 //TODO: Find better way to set isPageLoaded state
 // preferably not using 2x useEffect blocks
-
 const Home: NextPage = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [isPageLoaded, setIsPageLoaded] = useState(false);
+
 	useEffect(() => {
 		setIsLoaded(true);
 	}, []);
@@ -39,14 +39,6 @@ const Home: NextPage = () => {
 				priority
 			/>
 			<div className="w-full h-screen bg-slate-900 bg-opacity-80 relative">
-				<a
-					href="https://www.linkedin.com/in/joshua--davis/"
-					target="_blank"
-					rel="noopener noreferrer"
-					className="absolute right-0 p-4 m-4 rounded-md hover:bg-gray-800 transform duration-200 hover:bg-opacity-100 transition-all hover:scale-110"
-				>
-					<Linkedin className="w-8 h-8 text-gray-300" />
-				</a>
 				<main
 					className={`container mx-auto flex flex-col items-center justify-center min-h-screen p-4`}
 				>
@@ -61,6 +53,24 @@ const Home: NextPage = () => {
 						<p className="text-2xl text-gray-300 text-center">
 							A portfolio of my developer experience
 						</p>
+						<div className="flex justify-center">
+							<a
+								href="https://github.com/JershDervis"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="p-4 md:m-2 m-4 rounded-md hover:bg-gray-800 transform duration-200 hover:bg-opacity-100 transition-all hover:scale-110"
+							>
+								<Github className="w-6 h-6 text-gray-300" />
+							</a>
+							<a
+								href="https://www.linkedin.com/in/joshua--davis/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="p-4 md:m-2 m-4 rounded-md hover:bg-gray-800 transform duration-200 hover:bg-opacity-100 transition-all hover:scale-110"
+							>
+								<Linkedin className="w-6 h-6 text-gray-300" />
+							</a>
+						</div>
 					</div>
 				</main>
 			</div>
