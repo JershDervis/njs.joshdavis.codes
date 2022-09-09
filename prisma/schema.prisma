@@ -11,8 +11,9 @@ datasource db {
 
 model Repository {
   id          Int      @id @default(autoincrement())
+  repoId      Int      @unique
   name        String
-  description String
+  description String?
   url         String
   stars       Int
   forks       Int

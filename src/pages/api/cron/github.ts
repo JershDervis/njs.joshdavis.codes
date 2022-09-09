@@ -1,16 +1,22 @@
 // pages/api/cron/github.ts
+import { Repository } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../server/db/client';
 
 type Repo = {
 	id: number;
 	name: string;
+	full_name: string;
 	description: string;
 	html_url: string;
 	stargazers_count: number;
+	watchers_count: number;
+	language: string;
 	forks_count: number;
-	created_at: Date;
-	updated_at: Date;
+	open_issues_count: number;
+	pushed_at: string;
+	created_at: string;
+	updated_at: string;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -26,18 +32,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				if (response.status === 200) {
 					let resData = await response.json();
 
-					// Fill the SQL database TODO: Fix this createMany records
-					await prisma.repository.createMany({
-						data: resData.map((repo: Repo) => ({
-							name: repo.name,
-							description: repo.description,
-							url: repo.html_url,
-							stars: repo.stargazers_count,
-							forks: repo.forks_count,
-							createdAt: repo.created_at,
-							updatedAt: repo.updated_at
-						}))
-					});
+					// Upsert many records at a time
+					await prisma.$transaction(
+						resData.map((repo: Repo) =>
+							prisma.repository.upsert({
+								create: {
+									repoId: repo.id,
+									name: repo.name,
+									description: repo.description,
+									url: repo.html_url,
+									stars: repo.stargazers_count,
+									forks: repo.forks_count,
+									createdAt: repo.created_at,
+									updatedAt: repo.updated_at
+								},
+								update: {
+									repoId: repo.id,
+									name: repo.name,
+									description: repo.description,
+									url: repo.html_url,
+									stars: repo.stargazers_count,
+									forks: repo.forks_count,
+									createdAt: repo.created_at,
+									updatedAt: repo.updated_at
+								},
+								where: { repoId: repo.id }
+							})
+						)
+					);
 				}
 
 				res.status(200).json({ success: true });

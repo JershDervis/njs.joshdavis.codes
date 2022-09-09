@@ -31,7 +31,7 @@ const Home: NextPage = () => {
 			{/* Main content */}
 			<Image
 				src="/bg.jpg"
-				alt="Image of Josh Davis on holiday"
+				alt="Photo of Josh Davis"
 				layout="fill"
 				objectFit="cover"
 				placeholder="blur"
