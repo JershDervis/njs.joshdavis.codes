@@ -1,5 +1,5 @@
 import { env } from './src/env/server.mjs';
-const { withAxiom } = require('next-axiom');
+import { withAxiom } from 'next-axiom';
 
 /**
  * Don't be scared of the generics here.
