@@ -1,7 +1,7 @@
 // pages/api/cron/github.ts
-import { Repository } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../server/db/client';
+import { log, withAxiom } from 'next-axiom';
 
 type Repo = {
 	id: number;
@@ -19,7 +19,7 @@ type Repo = {
 	updated_at: string;
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === 'POST') {
 		try {
 			const { authorization } = req.headers;
@@ -31,9 +31,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 				if (response.status === 200) {
 					let resData = await response.json();
+					log.debug('Github API response', resData);
 
 					// Upsert many records at a time
-					await prisma.$transaction(
+					const dbUpdateTrans = await prisma.$transaction(
 						resData.map((repo: Repo) =>
 							prisma.repository.upsert({
 								create: {
@@ -60,14 +61,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 							})
 						)
 					);
+
+					log.debug('DB update transaction', dbUpdateTrans);
 				}
 
 				res.status(200).json({ success: true });
 			} else {
+				log.warn('Inavalid API key used', authorization);
 				res.status(401).json({ success: false });
 			}
 		} catch (err: any) {
-			//TODO: work out the type for this error
+			log.error('Error in repository update', err.message);
 			res.status(500).json({ statusCode: 500, message: err.message });
 		}
 	} else {
@@ -75,3 +79,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		res.status(405).end('Method Not Allowed');
 	}
 }
+
+export default withAxiom(handler);

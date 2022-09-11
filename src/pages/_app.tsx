@@ -7,6 +7,8 @@ import superjson from 'superjson';
 import type { AppRouter } from '../server/router';
 import '../styles/globals.css';
 
+export { reportWebVitals } from 'next-axiom';
+
 const MyApp: AppType = ({ Component, pageProps }) => {
 	return <Component {...pageProps} />;
 };
