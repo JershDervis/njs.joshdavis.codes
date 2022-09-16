@@ -18,3 +18,5 @@ This is the current project of my career portfolio. The idea is to connect this 
 - LinkedIn updates
 - Big Maybe - Write an app that tracks my work commits (as these are private this would just track numbers), and recreate GitHubs 365 day tiled commits on my website with this info to more accurately display how often I'm coding
   - This would involve adding GitHubs numbers with my own
+
+PORTED THIS PROJECT to use the Astro framework.
